@@ -86,10 +86,23 @@ let finances = [
     ['Jan-2017', 138230],
     ['Feb-2017', 671099]
 ];
-let element = 0
+let total = 0
+let lossNumber = 0
+for (let i = 0; i < finances.length; i++) {
+    total = total + finances[i][1];
+}
+for (let i = 0; i < finances.length; i++) {
+    if (finances[i][1] < 0)
+        lossNumber = lossNumber + finances[i][1]
+}
+
+
+
+
+
+
 console.log("Financial Analysis")
 console.log("------------------------------")
 console.log("Total Months: " + finances.length)
-for (let i = 0; i < finances.length; i++) {
-    element = element + finances[i][1];
-} console.log("Total: $" + element)
+console.log("Total: $" + total)
+console.log("Losses: $"+lossNumber)
