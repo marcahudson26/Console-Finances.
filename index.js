@@ -88,21 +88,26 @@ let finances = [
 ];
 let total = 0
 let lossNumber = 0
+let totalMonths = finances.length
+
 for (let i = 0; i < finances.length; i++) {
     total = total + finances[i][1];
+    
 }
 for (let i = 0; i < finances.length; i++) {
     if (finances[i][1] < 0)
         lossNumber = lossNumber + finances[i][1]
+        
 }
+const average = total / totalMonths;
 
 
 
 
 
-
-console.log("Financial Analysis")
-console.log("------------------------------")
-console.log("Total Months: " + finances.length)
-console.log("Total: $" + total)
-console.log("Losses: $"+lossNumber)
+console.log("Financial Analysis");
+console.log("------------------------------");
+console.log(`Total Months: ${finances.length}`);
+console.log(`Total:  $${total}`);
+console.log(`Total Losses: $${lossNumber}`);
+console.log(`Average change: $${average.toFixed(2)}`)
