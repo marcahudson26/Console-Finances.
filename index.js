@@ -86,28 +86,40 @@ let finances = [
     ['Jan-2017', 138230],
     ['Feb-2017', 671099]
 ];
-let total = 0
-let lossNumber = 0
-let totalMonths = finances.length
+
+let total = 0;
+let lossNumber = 0;
+let totalMonths = finances.length;
+let highestValue = 0;
+let lowestValue = 0;
 
 for (let i = 0; i < finances.length; i++) {
     total = total + finances[i][1];
-    
+    if (finances[i][1] > highestValue) {
+        highestValue = finances[i][1]
+        highestProfitMonth = finances[i][0]
+    }
+    if (finances[i][1] < lowestValue) {
+        lowestValue = finances[i][1]
+        lowestProfitMonth = finances[i][0]
+    }
+
 }
 for (let i = 0; i < finances.length; i++) {
     if (finances[i][1] < 0)
         lossNumber = lossNumber + finances[i][1]
-        
+
 }
 const average = total / totalMonths;
 
 
+console.log(`Financial Analysis 
+------------------------------
+Total Months: ${totalMonths}
+Total Amount: $${total} 
+Total Losses: $${lossNumber}
+Average change: $${average.toFixed(2)} 
+Greatest Increse in profits: ${highestProfitMonth} ($${highestValue}) 
+Greatest Increse in profits: ${lowestProfitMonth} ($${lowestValue})`);
 
 
-
-console.log("Financial Analysis");
-console.log("------------------------------");
-console.log(`Total Months: ${finances.length}`);
-console.log(`Total:  $${total}`);
-console.log(`Total Losses: $${lossNumber}`);
-console.log(`Average change: $${average.toFixed(2)}`)
