@@ -88,38 +88,42 @@ let finances = [
 ];
 
 let total = 0;
-let lossNumber = 0;
 let totalMonths = finances.length;
 let highestValue = 0;
 let lowestValue = 0;
+let changes = [];
+let totalChanges = 0;
 
 for (let i = 0; i < finances.length; i++) {
     total = total + finances[i][1];
     if (finances[i][1] > highestValue) {
-        highestValue = finances[i][1]
-        highestProfitMonth = finances[i][0]
+        highestValue = finances[i][1];
+        highestProfitMonth = finances[i][0];
     }
     if (finances[i][1] < lowestValue) {
-        lowestValue = finances[i][1]
-        lowestProfitMonth = finances[i][0]
+        lowestValue = finances[i][1];
+        lowestProfitMonth = finances[i][0];
     }
+    if (i === 0) {
+        changes.push(finances[i][1])
 
+    } else {
+        changes.push(finances[i][1] - finances[i - 1][1])
+    }
 }
-for (let i = 0; i < finances.length; i++) {
-    if (finances[i][1] < 0)
-        lossNumber = lossNumber + finances[i][1]
 
+for (let i = 0; i < changes.length; i++) {
+     totalChanges = totalChanges + changes[i];
+    
 }
-const average = total / totalMonths;
+const average = totalChanges / totalMonths;
 
 
 console.log(`Financial Analysis 
 ------------------------------
 Total Months: ${totalMonths}
 Total Amount: $${total} 
-Total Losses: $${lossNumber}
 Average change: $${average.toFixed(2)} 
 Greatest Increse in profits: ${highestProfitMonth} ($${highestValue}) 
-Greatest Increse in profits: ${lowestProfitMonth} ($${lowestValue})`);
-
+Greatest decrese in profits: ${lowestProfitMonth} ($${lowestValue})`);
 
