@@ -89,41 +89,38 @@ let finances = [
 
 let total = 0;
 let totalMonths = finances.length;
-let highestValue = 0;
-let lowestValue = 0;
-let changes = [];
 let totalChanges = 0;
 
+
 for (let i = 0; i < finances.length; i++) {
-    total = total + finances[i][1];
-    if (finances[i][1] > highestValue) {
-        highestValue = finances[i][1];
-        highestProfitMonth = finances[i][0];
-    }
-    if (finances[i][1] < lowestValue) {
-        lowestValue = finances[i][1];
-        lowestProfitMonth = finances[i][0];
-    }
-    if (i === 0) {
-        changes.push(finances[i][1])
-
-    } else {
-        changes.push(finances[i][1] - finances[i - 1][1])
-    }
-}
-
-for (let i = 0; i < changes.length; i++) {
-     totalChanges = totalChanges + changes[i];
-    
+     totalChanges = totalChanges + finances[i][1];
 }
 const average = totalChanges / totalMonths;
 
+const greatestIncrease = { date: '', amount: 0 };
+const greatestDecrease = { date: '', amount: 0 };
 
-console.log(`Financial Analysis 
+for (let i = 1; i < finances.length; i++) {
+  let currentProfit = finances[i][1] - finances[i - 1][1];
+  if (currentProfit > greatestIncrease.amount) {
+    greatestIncrease.date = finances[i][0];
+    greatestIncrease.amount = currentProfit;
+  }
+  if (currentProfit < greatestDecrease.amount) {
+    greatestDecrease.date = finances[i][0];
+    greatestDecrease.amount = currentProfit;
+  }
+}
+
+
+
+console.log(`Financial Analysis. 
 ------------------------------
 Total Months: ${totalMonths}
-Total Amount: $${total} 
-Average change: $${average.toFixed(2)} 
-Greatest Increse in profits: ${highestProfitMonth} ($${highestValue}) 
-Greatest decrese in profits: ${lowestProfitMonth} ($${lowestValue})`);
+Total Amount: $${totalChanges} 
+Average Net change: $${average.toFixed(2)}
+The greatest increase in profits: ${greatestIncrease.date} ($${greatestIncrease.amount})
+The greatest decrease in losses: ${greatestDecrease.date} ($${greatestDecrease.amount})
+`);
+
 
